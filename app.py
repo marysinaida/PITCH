@@ -1,4 +1,5 @@
 from flask import Flask,render_template
+from wtform_fields import *
 
 app = Flask(__name__)
 app.secret_key = 'replace'
@@ -6,7 +7,11 @@ app.secret_key = 'replace'
 @app.route('/',methods = ['GET','POST'])
 def index():
 
-    return render_template('index.html')
+    reg_form = RegistartionForm()
+    if reg_form.validate_on_submit():
+        return"you have signed in"
+
+    return render_template('index.html',form = reg_form)
 
 if __name__ == "__main__":
     app.run(debug=True)
